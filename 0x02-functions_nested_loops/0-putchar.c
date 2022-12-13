@@ -1,8 +1,8 @@
 #include <unistd.h>
-#include "alxheader.h"
+#include "main.h"
 
 /**
- * main - Prints _putchar anf a new line
+ * main - Prints _putchar and a new line
  * Return: Always 0
  */
 
