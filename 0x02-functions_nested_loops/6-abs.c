@@ -4,7 +4,7 @@
  * _abs - Prints absolute value of an integer
  * @a : input character
  * Return:Absolute value of a
- */ 
+ */
 
 int _abs(int a)
 {
