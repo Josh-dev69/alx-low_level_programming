@@ -8,6 +8,7 @@ int _islower(int c);
 int _isalpha(int c);
 int print_sign(int c);
 int _abs(int a);
+int print_last_digit(int a);
 
 
 #endif
