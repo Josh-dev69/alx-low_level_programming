@@ -19,7 +19,7 @@ int main(void)
 	{
 		fib[i] = fib[i - 1] + fib[i - 2];
 		if (i == 49)
-			printf("%ld\n ", fib[i]);
+			printf("%ld\n", fib[i]);
 		else
 			printf("%ld, ", fib[i]);
 	}
