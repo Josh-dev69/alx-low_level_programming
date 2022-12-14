@@ -7,19 +7,20 @@
 
 int main(void)
 {
-	int count, f1, f2, fib;
+	int i;
+	long int fib[50];
 
-	f1 = 1;
-	f2 = 2;
+	fib[0] = 1;
+	fib[1] = 2;
 
-	printf("%d, %d, ", f1, f2);
+	printf("%ld, %ld, ", fib[0], fib[1]);
 
-	for (count = 2; count < 50; count++)
+	for (i = 2; i < 50; i++)
 	{
-		fib = f1 + f2;
-		printf("%d, ", fib);
-		f1 = f2;
-		f2 = fib;
+		fib[i] = fib[i - 1] + fib[i - 2];
+		printf("%ld, ", fib[i]);
+		fib[0] = fib[1];
+		fib[1] = fib[i];
 	}
 	printf("\n");
 	return (0);
