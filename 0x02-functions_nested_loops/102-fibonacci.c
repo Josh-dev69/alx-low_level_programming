@@ -18,10 +18,10 @@ int main(void)
 	for (i = 2; i < 50; i++)
 	{
 		fib[i] = fib[i - 1] + fib[i - 2];
-		printf("%ld, ", fib[i]);
-		fib[0] = fib[1];
-		fib[1] = fib[i];
+		if (i == 49)
+			printf("%ld\n ", fib[i]);
+		else
+			printf("%d, ", fib[i]);
 	}
-	printf("\n");
 	return (0);
 }
