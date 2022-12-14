@@ -19,7 +19,7 @@ int main(void)
 		fib = f1 + f2;
 		printf("%d, ", fib);
 		f1 = f2;
-		f2 = f;
+		f2 = fib;
 	}
 	printf("\n");
 	return (0);
