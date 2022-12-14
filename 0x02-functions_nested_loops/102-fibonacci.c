@@ -21,7 +21,7 @@ int main(void)
 		if (i == 49)
 			printf("%ld\n ", fib[i]);
 		else
-			printf("%d, ", fib[i]);
+			printf("%ld, ", fib[i]);
 	}
 	return (0);
 }
