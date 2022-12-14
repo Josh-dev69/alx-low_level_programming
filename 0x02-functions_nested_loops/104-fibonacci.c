@@ -8,18 +8,40 @@
 int main(void)
 {
 	int i;
-	unsigned int fib1, fib2, fibNext;
+	unsigned int fib1, fib2, fibNext, half1, half2;
+	unsigned int f1_h1, f1_h2, f2_h1, f2_h2;
 
-	fib1 = 1;
-	fib2 = 2;
+	fib1 = 0;
+	fib2 = 1;
 
-	printf("%u, %u, ", fib1, fib2);
-	for (i = 2; i < 98; i++)
+	for (i = 0; i < 98; i++)
 	{
 		fibNext = fib1 + fib2;
 		printf("%u, ", fibNext);
 		fib1 = fib2;
 		fib2 = fibNext;
+	}
+	f1_h1 = fib1 / 10000000000;
+	f1_h2 = fib1 % 10000000000;
+	f2_h1 = fib2 / 10000000000;
+	f2_h2 = fib2 % 10000000000;
+
+	for (i = 93; i < 99; i++)
+	{
+		half1 = f1_h1 + f2_h1;
+		half2 = f1_h2 + f2_h2;
+		if (f1_h2 + f2_h2 > 9999999999)
+		{
+			half1 += 1;
+			half2 %= 10000000000;
+		}
+		printf("%u%u", half1, half2);
+		if (i != 98)
+			printf(", ");
+		f1_h1 = f2_h1;
+		f1_h2 = f2_h2;
+		f2_h1 = half1;
+		f2_h2 = half2;
 	}
 	printf("\n");
 	return (0);

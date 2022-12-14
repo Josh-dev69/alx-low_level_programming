@@ -1,11 +1,9 @@
 #include "main.h"
-
 /**
  *  print_times_table - Print the times table to the range of the input character
  *  @n: input character
  *  Return: Nothing
  */
-
 void print_times_table(int n)
 {
 	int i, j, res;
