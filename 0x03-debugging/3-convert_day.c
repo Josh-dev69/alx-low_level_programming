@@ -2,17 +2,16 @@
 #include "main.h"
 
 /**
- * print_remaining_days - takes a date and print how many days are left
- * in the year, taking leap years into account
+ * convert_days - Converts day of the month to day of the year, without accounting
+ * for leap year
  * @month: month in number format
  * @day: day of the month
- * @year: year
  * Return: Void
  */
 
-void print_remaining_days(int month, int day, int year)
+void print_remaining_days(void)
 {
-	if (year % 4 == 0 || (year % 400 == 0 && year % 100 == 0))
+	\if (year % 4 == 0 || year % 400 == 0 && year % 100 == 0))
 	{
 		if (month > 2 && day >= 60)
 		{
