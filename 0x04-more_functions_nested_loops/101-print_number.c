@@ -22,7 +22,7 @@ void print_number(int n)
 	j = m;
 	count = 1;
 
-	while(j > 9)
+	while (j > 9)
 	{
 		j /= 10;
 		count *= 10;
