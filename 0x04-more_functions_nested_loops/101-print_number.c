@@ -5,7 +5,6 @@
  * @n: integer parameter
  * Return: Nothing
  */
-
 void print_number(int n)
 {
 	unsigned int m, j, count;
