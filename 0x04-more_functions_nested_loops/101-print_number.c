@@ -2,35 +2,35 @@
 
 /**
  * print_number - Prints an integer
- * @n: input integer
+ * @n: integer parameter
  * Return: Nothing
  */
 
 void print_number(int n)
 {
-	unsigned int a, i, j;
+	unsigned int i, j, count;
 
 	if (n < 0)
 	{
 		_putchar(45);
-		a = n * -1;
+		i = n * -1;
 	}
 	else
 	{
-		a = n;
+		i = n;
 	}
 
-	i = a;
-	j = 1;
+	j = i;
+	count = 1;
 
-	while(i > 9)
+	while(j > 9)
 	{
-		i = i / 10;
-		j = j * 10;
+		j /= 10;
+		count = count * 10;
 	}
 
-	for(; j >= 1; j = j / 10)
+	for(; count >= 1; count /= 10)
 	{
-		_putchar(((a / j) % 10) + '0');
+		_putchar(((i / count) % 10) + 48);
 	}
 }
