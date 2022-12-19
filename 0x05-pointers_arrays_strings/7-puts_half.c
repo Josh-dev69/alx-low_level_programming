@@ -9,7 +9,6 @@
 void puts_half(char *str)
 {
 	int i, start, len = 0;
-
 	/* Loop to check the length of the string */
 	while (str[len] != '\0')
 	{
