@@ -8,7 +8,7 @@
 
 void puts_half(char *str)
 {
-	int i, start, len = 0;
+	int i, n, len = 0;
 	/* Loop to check the length of the string */
 	while (str[len] != '\0')
 	{
@@ -17,14 +17,14 @@ void puts_half(char *str)
 	/* condition that determine the start of the printing */
 	if (len % 2 == 0)
 	{
-		start = len / 2;
+		n = len / 2;
 	}
 	else
 	{
-		start = (len + 1) / 2;
+		n = (len - 1) / 2;
 	}
 	/* Loop for Printing the half */
-	for (i = start; i < len; i++)
+	for (i = n; i < len; i++)
 	{
 		_putchar(str[i]);
 	}
