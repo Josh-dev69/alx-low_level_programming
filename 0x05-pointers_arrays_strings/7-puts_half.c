@@ -13,10 +13,11 @@ void puts_half(char *str)
 	while (str[len] != '\0')
 		len++;
 	/* condition that determine the start of the printing */
-	if (len % 2 == 0)
-		n = len / 2;
-	else
+	if ((len + 1) % 2 != 0)
 		n = (len - 1) / 2;
+	else
+		n = (len / 2);
+	n++;
 	/* Loop for Printing the half */
 	for (i = n; i < len; i++)
 		_putchar(str[i]);
