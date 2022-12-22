@@ -7,18 +7,18 @@
  */
 char *rot13(char *c)
 {
-	int i;
+	int i, j;
 
 	for (i = 0; c[i] != '\0'; i++)
 	{
-		for (i = 0; (c[i] >= 'a' && c[i] <= 'z') ||
-			       (c[i] >= 'A' && c[i] <= 'Z'); i++)
+		for (j = 0; (c[j] >= 'a' && c[j] <= 'z') ||
+			       (c[j] >= 'A' && c[j] <= 'Z'); j++)
 		{
-			if ((c[i] >= 'a' && c[i] <= 'm') ||
-					(c[i] >= 'A' && c[i] <= 'M'))
-				c[i] = c[i] + 13;
+			if ((c[j] >= 'a' && c[j] <= 'm') ||
+					(c[j] >= 'A' && c[j] <= 'M'))
+				c[j] += 13;
 			else
-				c[i] = c[i] - 13;
+				c[j] -= 13;
 		}
 	}
 	return (c);
