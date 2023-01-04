@@ -19,7 +19,7 @@ int check_prime(int num, int div)
 /**
  * is_prime_number - A functions that returns only prime numbers
  * @n: integer parameter
- * Return: The square root of n
+ * Return: an integer prime
  */
 int is_prime_number(int n)
 {
