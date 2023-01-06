@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 
 /**
  * main - Program that adds two positive numbers
@@ -7,21 +8,25 @@
  * @argv: argument vector
  * Return: 0(SUCCESS)
  */
-int main(int argc, char **argv)
+int main(int argc, char *argv[])
 {
-	int i, sum = 0, num;
+	int i, sum = 0, num, j;
+	char *arg;
 
-	if (argc == 1)
-		printf("Error\n");
-	else
+	for (i = 1; i < argc; i++)
 	{
-		for (i = 0; i < argc; i++)
+		arg = argv[i];
+		for (j = 0; arg[j]; j++)
 		{
-			num = atoi(argv[i]);
-			if (num > 0)
-				sum += num;
+			if (!(isdigit(arg[j])))
+			{
+				printf("Error\n");
+				return (1);
+			}
 		}
-		printf("%d\n", sum);
+		num = atoi(arg);
+		sum += num;
 	}
+	printf("%d\n", sum);
 	return (0);
 }
