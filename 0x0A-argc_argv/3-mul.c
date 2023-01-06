@@ -21,7 +21,7 @@ int main(int argc, char **argv)
 		num1 = atoi(argv[1]);
 		num2 = atoi(argv[2]);
 		mult = num1 * num2;
-		printf("The result is: %d\n", mult);
+		printf("%d\n", mult);
 		return (0);
 	}
 }
