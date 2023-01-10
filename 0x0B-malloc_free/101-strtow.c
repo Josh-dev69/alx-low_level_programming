@@ -3,26 +3,22 @@
 
 /**
  * strtow - A function that splits a string into words
- * @str: An input pointer of the string to split
- * Return: Apointer to concatened strings or NULL if it str is NULL
+ * @str: String Input
+ * Return: NULL if it str is NULL
  */
 char **strtow(char *str)
 {
 	char **array;
-	int i = 0, j, k = 0, len = 0, count = 0;
-	
+	int i, j, k, count;
+
+	k = 0;
+	i = 0;
 	if (str == NULL || *str == '\0')
 		return (NULL);
-	for (i = 0; str[i]; i++)
-	{
-		if (str[i] != ' ' && str[i] != '\t')
-			if ((str[i + 1] == ' '
-			|| str[i + 1] == '\t' || str[i + 1] == '\0'))
-				count++;
-	}
+	count = countWords(str);
 	if (count == 0)
 		return (NULL);
-	array = malloc((count + 1) * sizeof(char*));
+	array = (char **)malloc((sizeof(char *) * (count + 1));
 	if (array == NULL)
 		return (NULL);
 	for (i = 0; str[i];)
@@ -32,8 +28,7 @@ char **strtow(char *str)
 			j = i + 1;
 			while (str[j] != ' ' && str[j] != '\t' && str[j] != '\0')
 				j++;
-			len = j - i;
-			array[k] = malloc((len + 1) * sizeof(char));
+			array[k] = malloc((j - i + 1) * sizeof(char));
 			if (array[k] == NULL)
 			{
 				for (j = 0; j < k; j++)
@@ -41,8 +36,9 @@ char **strtow(char *str)
 				free(array);
 				return (NULL);
 			}
-			memcpy(array[k], &str[i], len);
-			array[k][len] = '\0';
+			for (int m = 0; m < j - i; m++)
+				array[k][m] = str[i + m];
+			array[k][j - i] = '\0';
 			k++;
 			i = j;
 		}
@@ -51,4 +47,24 @@ char **strtow(char *str)
 	}
 	array[k] = NULL;
 	return (array);
+}
+
+/**
+ * countWords - function to counts the number of words in a string
+ * @str: Input Character pointer
+ * Return: the value of the count
+ */
+int countWords(char *str)
+{
+	int i, count;
+
+	i = 0;
+	count = 0;
+	for (i = 0; str[i]; i++)
+	{
+		if (str[i] != ' ' && str[i] != '\t')
+			if ((str[i + 1] == ' ' || str[i + 1] == '\t' || str[i + 1] == '\0'))
+				count++;
+	}
+	return (count);
 }
