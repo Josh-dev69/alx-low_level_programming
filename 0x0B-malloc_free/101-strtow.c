@@ -9,62 +9,42 @@
 char **strtow(char *str)
 {
 	char **array;
-	int i, j, k, count;
-
-	k = 0;
-	i = 0;
+	int i = 0, j, m, k = 0, len = 0, count = 0;
+	
 	if (str == NULL || *str == '\0')
 		return (NULL);
-	count = countWords(str);
+	for (; str[i]; i++)
+	{
+		if ((str[i] != ' ' || *str != '\t') &&
+				((str[i + 1] == ' ' || str[i + 1] == '\t') || str[i + 1] == '\n'))
+			count++;
+	}
 	if (count == 0)
 		return (NULL);
-	array = (char **)malloc((sizeof(char *) * (count + 1));
+	array = malloc(sizeof(char *) * (count + 1));
 	if (array == NULL)
 		return (NULL);
-	for (i = 0; str[i];)
+	for (i = 0; str[i] != '\0' && k < count; i++)
 	{
-		if (str[i] != ' ' && str[i] != '\t')
+		if (str[i] != ' ' || str[i] != '\t')
 		{
-			j = i + 1;
-			while (str[j] != ' ' && str[j] != '\t' && str[j] != '\0')
-				j++;
-			array[k] = malloc((j - i + 1) * sizeof(char));
+			len = 0;
+			j = i;
+			while ((str[j] != ' ' || str[j] != '\t') && str[j] != '\0')
+				j++, len++;
+			array[k] = malloc((len + 1) * sizeof(char));
 			if (array[k] == NULL)
 			{
-				for (j = 0; j < k; j++)
-					free(array[j]);
+				for (k = k - 1; k >= 0; k++)
+					free(array[k]);
 				free(array);
 				return (NULL);
 			}
-			for (int m = 0; m < j - i; m++)
-				array[k][m] = str[i + m];
-			array[k][j - i] = '\0';
-			k++;
-			i = j;
+			for (m = 0; m < len; m++, i++)
+				array[k][m] = str[i];
+			array[k++][m] = '\0';
 		}
-		else
-			i++;
 	}
 	array[k] = NULL;
 	return (array);
-}
-
-/**
- * countWords - function to counts the number of words in a string
- * @str: Input Character pointer
- * Return: the value of the count
- */
-int countWords(char *str)
-{
-	int i, count;
-
-	i = 0;
-	count = 0;
-	for (i = 0; str[i]; i++)
-	{
-		if (str[i] != ' ' && str[i] != '\t')
-			if ((str[i + 1] == ' ' || str[i + 1] == '\t' || str[i + 1] == '\0'))
-				count++;
-	}
-	return (count);
 }
