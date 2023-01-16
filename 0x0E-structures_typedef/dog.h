@@ -6,6 +6,7 @@
  * @name: name member of the structure
  * @age: age member of the structure
  * @owner: Owner member of the structure
+ * Description: define a new type struct dog
  */
 
 struct dog
