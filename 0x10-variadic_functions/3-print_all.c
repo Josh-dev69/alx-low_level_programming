@@ -6,7 +6,7 @@
  * print_all - function that prints anything, followed by a new line
  * @format: variable number of arguments
  */
-void print_all(const char * const format, ...) {
+void print_all(const char * const format, ...)
 {
 	va_list li_args;
 	unsigned int i = 0;
