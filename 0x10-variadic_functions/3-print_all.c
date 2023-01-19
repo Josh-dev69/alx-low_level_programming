@@ -10,7 +10,7 @@ void print_all(const char * const format, ...)
 {
 	va_list li_args;
 	unsigned int i = 0;
-	char *separator = "";
+	char *separator = "", *str;
 
 	va_start(li_args, format);
 	while (format && format[i])
@@ -28,7 +28,7 @@ void print_all(const char * const format, ...)
 				break;
 			case 's':
 				{
-					char *str = va_arg(li_args, char*);
+					str = va_arg(li_args, char*);
 					if (str == NULL)
 						printf("%s(nil)", separator);
 					else
