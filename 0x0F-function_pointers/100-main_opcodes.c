@@ -25,11 +25,13 @@ int main(int argc, char *argv[])
 	}
 	func_ptr = (unsigned char *)main;
 	i = 0;
-	if (bytes > 0)
+	while (i < bytes)
 	{
-		while (i < (bytes - 1))
-			printf("%02hhx ", func_ptr[i++]);
-		printf("%hhx\n", func_ptr[i]);
+		printf("%02x ", func_ptr[i] & 0xFF);
+		if (i != bytes - 1)
+			printf(" ");
+		i++;
 	}
+	printf("n");
 	return (0);
 }
