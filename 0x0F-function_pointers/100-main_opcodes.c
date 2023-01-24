@@ -9,8 +9,8 @@
  */
 int main(int argc, char *argv[])
 {
-	int bytes, i;
-	unsigned char *func_ptr;
+	int bytes, i = 0;
+	char *func_ptr;
 
 	if (argc != 2)
 	{
@@ -23,8 +23,9 @@ int main(int argc, char *argv[])
 		printf("Error\n");
 		exit(2);
 	}
-	func_ptr = (unsigned char *)main;
-	i = 0;
+	
+	func_ptr = (char *)main;
+	
 	while (i < bytes)
 	{
 		printf("%02x ", func_ptr[i] & 0xFF);
@@ -32,6 +33,6 @@ int main(int argc, char *argv[])
 			printf(" ");
 		i++;
 	}
-	printf("n");
+	printf("\n");
 	return (0);
 }

@@ -3,6 +3,39 @@
 #include <stdlib.h>
 
 /**
+ * op_add - Function to perform simple addition
+ * @a: first integer parameter
+ * @b: second integer parameter
+ * Return: the result of the addition
+ */
+int op_add(int a, int b)
+{
+    return (a + b);
+}
+
+/**
+ * op_div - Function to perform simple subtraction
+ * @a: first integer parameter
+ * @b: second integer parameter
+ * Return: the result of the subtraction
+ */
+int op_sub(int a, int b)
+{
+    return (a - b);
+}
+
+/**
+ * op_mul - Function to perform simple multiplication
+ * @a: first integer parameter
+ * @b: second integer parameter
+ * Return: the result of the multiplication
+ */
+int op_mul(int a, int b)
+{
+    return (a * b);
+}
+
+/**
  * op_div - Function to perform simple division
  * @a: first integer parameter
  * @b: second integer parameter
@@ -32,37 +65,4 @@ int op_mod(int a, int b)
         exit(100);
     }
     return (a % b);
-}
-
-/**
- * op_add - Function to perform simple addition
- * @a: first integer parameter
- * @b: second integer parameter
- * Return: the result of the addition
- */
-int op_add(int a, int b)
-{
-    return (a + b);
-}
-
-/**
- * op_mul - Function to perform simple multiplication
- * @a: first integer parameter
- * @b: second integer parameter
- * Return: the result of the multiplication
- */
-int op_mul(int a, int b)
-{
-    return (a * b);
-}
-
-/**
- * op_div - Function to perform simple subtraction
- * @a: first integer parameter
- * @b: second integer parameter
- * Return: the result of the subtraction
- */
-int op_sub(int a, int b)
-{
-    return (a - b);
 }
