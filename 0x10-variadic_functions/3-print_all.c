@@ -1,15 +1,14 @@
 #include <stdarg.h>
 #include "variadic_functions.h"
-#include <stdio.h>
 
 /**
- *  * print_all - function that prints anything, followed by a new line
- *   * @format: variable number of argument
- *    */
+ * print_all - function that prints anything, followed by a new line
+ * @format: variable number of argument
+ */
 void print_all(const char * const format, ...)
 {
 	va_list li_args;
-	unsigned int i = 0;
+	int i = 0, flag;
 	char *str;
 
 	va_start(li_args, format);
@@ -18,18 +17,21 @@ void print_all(const char * const format, ...)
 		printf("\n");
 		return;
 	}
-	while (format && format[i])
+	while (format != NULL && format[i] != '\0')
 	{
 		switch (format[i])
 		{
 			case 'c':
 				printf("%c", (char) va_arg(li_args, int));
+				flag = 0;
 				break;
 			case 'i':
-				printf("%d", va_arg(li_args, int));
+				printf("%i", va_arg(li_args, int));
+				flag = 0;
 				break;
 			case 'f':
 				printf("%f", (float) va_arg(li_args, double));
+				flag = 0;
 				break;
 			case 's':
 				str = va_arg(li_args, char*);
@@ -39,13 +41,16 @@ void print_all(const char * const format, ...)
 					break;
 				}
 				printf("%s", str);
+				flag = 0;
+				break;
+			default:
+				flag = 1;
 				break;
 		}
-		if ((format[i] == 'c' || format[i] == 'i' || format[i] == 'f' ||
-					format[i] == 's') && format[(i + 1)] != '\0')
+		if (format[i + 1] != '\0' && flag == 0)
 			printf(", ");
 		i++;
 	}
-	va_end(li_args);
 	printf("\n");
+	va_end(li_args);
 }
