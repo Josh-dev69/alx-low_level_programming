@@ -1,65 +1,41 @@
 #include "main.h"
 #include <stdio.h>
 
-#define BUFSIZE 1024
-
-int open_file(const char *file, int flags);
+char *create_buffer(char *file);
 void close_file(int fd);
-void read_file(int fd_from, int fd_to);
 
 /**
- * main - Entry
- * @argc: argument count
- * @argv: argument vector
- * Return: 0 on Success
+ * create_buffer - Allocates 1024 bytes for a buffer.
+ * @file: The name of the file buffer is storing chars for.
+ * Return: A pointer to the newly-allocated buffer.
  */
-int main(int argc, char *argv[])
+char *create_buffer(char *file)
 {
-	int file_from, file_to;
-	
-	if (argc != 3)
+	char *buffer;
+
+	buffer = malloc(sizeof(char) * 1024);
+
+	if (buffer == NULL)
 	{
-		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
-		exit(97);
+		dprintf(STDERR_FILENO,
+			"Error: Can't write to %s\n", file);
+		exit(99);
 	}
-	file_from = open_file(argv[1], O_RDONLY);
-	file_to = open_file(argv[2], O_CREAT | O_TRUNC | O_WRONLY);
-	read_file(file_from, file_to);
-	
-	close_file(file_from);
-	close_file(file_to);
-	return (0);
+
+	return (buffer);
 }
 
 /**
- * open_file - Function to open a file
- * @file: file path to open
- * @flag: the flags to use when opening the file
- * Return: the file descriptor.
- */
-int open_file(const char *file, int flags)
-{
-	int fd; 
-	
-	fd= open(file, flags, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
-	if (fd == -1)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't open %s\n", file);
-		exit(98);
-	}
-	return (fd);
-}
-
-/**
- * close_file - Function to close the file
- * @fd: File descriptor to close
+ * close_file - Closes file descriptors.
+ * @fd: The file descriptor to be closed.
  */
 void close_file(int fd)
 {
-	int cl;
-	
-	cl = close(fd);
-	if (cl == -1)
+	int c;
+
+	c = close(fd);
+
+	if (c == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd);
 		exit(100);
@@ -67,22 +43,52 @@ void close_file(int fd)
 }
 
 /**
- * read_file - Function to read the file
- * @fd_from: file descriptor of the file to read data from.
- * @fd_to: file descriptor of the file to write data to.
+ * main - Copies the contents of a file to another file.
+ * @argc: The number of arguments supplied to the program.
+ * @argv: An array of pointers to the arguments.
+ * Return: 0 on success.
  */
-void read_file(int fd_from, int fd_to)
+int main(int argc, char *argv[])
 {
-	char buf[BUFSIZE];
-	int rd, wr;
-	
-	while ((rd = read(fd_from, buf, BUFSIZE)) > 0)
+	int from, to, r, w;
+	char *buffer;
+
+	if (argc != 3)
 	{
-		wr = write(fd_to, buf, rd);
-		if (wr == -1)
+		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
+		exit(97);
+	}
+
+	buffer = create_buffer(argv[2]);
+	from = open(argv[1], O_RDONLY);
+	r = read(from, buffer, 1024);
+	to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
+
+	do {
+		if (from == -1 || r == -1)
 		{
-			dprintf(STDERR_FILENO, "Error: Can't write\n");
+			dprintf(STDERR_FILENO,
+				"Error: Can't read from file %s\n", argv[1]);
+			free(buffer);
+			exit(98);
+		}
+
+		w = write(to, buffer, r);
+		if (to == -1 || w == -1)
+		{
+			dprintf(STDERR_FILENO,
+				"Error: Can't write to %s\n", argv[2]);
+			free(buffer);
 			exit(99);
 		}
-	}
+
+		r = read(from, buffer, 1024);
+		to = open(argv[2], O_WRONLY | O_APPEND);
+
+	} while (r > 0);
+
+	free(buffer);
+	close_file(from);
+	close_file(to);
+	return (0);
 }
